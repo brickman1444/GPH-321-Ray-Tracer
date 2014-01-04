@@ -31,7 +31,7 @@ private:
 	checkerboardPhong checks;
 	glass glassMat;
 	ambientLight amb;
-	distantLight light_1;
+	pointLight light_1;
 	scene s;
 
 	// Event Handlers
@@ -57,8 +57,9 @@ Application::Application()
 	floor.SetMaterial(checks);
 	s.shapes.Append(&floor);
 
-	box = cube(point(0,0,0), vector(0,0,1), vector(0,1,0), 1); 
+	box = cube(point(0,0,0), vector(0,0,1), vector(0,1,0), 2); 
 	box.SetMaterial(m);
+	box.SetColor(rgb::red);
 	s.shapes.Append(&box);
 
 	ceiling = plane(point(0,0,10), vector(0,0,1));
@@ -98,16 +99,18 @@ Application::Application()
 	light_1.SetAttenuations(1, 0, .015);
 	light_1.SetAngleLimits(360, 360);
 	light_1.SetShadowColor(rgb(.5, .5, .5));*/
-	light_1 = distantLight(vector(0,1,-1), rgb::white, rgb::white, rgb::lightGray, true); 
+	//light_1 = distantLight(vector(0,0,-1), rgb::white, rgb::white, rgb::lightGray, true); 
+	light_1 = pointLight(point(5,5,5), rgb(.8,.8,.8), rgb::white, rgb(.2,.2,.2), true);
 	s.lights.Append(&light_1);
 
-	s.camera = point(6, 3, 5);
+	s.camera = point(10, 5, 10);
 	s.target = point(0, 0, 0);
 	s.up = vector(0, 0, 1);
 	s.win = &Win;
 	s.windowD = 2;
 	s.windowW = 1.5;
 	s.windowH = 1.5;
+	s.backgroundColor = rgb::green;
 
 	s.DrawScene();
 }

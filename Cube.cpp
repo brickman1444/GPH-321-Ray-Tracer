@@ -1,6 +1,7 @@
 	
 #include "Cube.h"
 #include "Polygon.h"
+#include "material.h"
 
 cube::cube(point p, vector u, vector r, double len) { 
 	bottomBackLeftPoint = p; 
@@ -11,7 +12,9 @@ cube::cube(point p, vector u, vector r, double len) {
 }
 
 void cube::CalculateSides() {
-	//create forward vector perpendicular to right and up
+	// Create forward vector perpendicular to right and up
+	// If right and up are the same direction or opposite directions, 
+	// forward have 0 length. 
 	vector forward = Cross(right, up);
 	//recreate right vector perpendicular to up and forward in case the 
 	//original right vector was not at a right angle to up
@@ -23,14 +26,15 @@ void cube::CalculateSides() {
 
 	//Left Side
 	//side[0] = polygon();
+	///*
 	side[0].AddPoint(bottomBackLeftPoint);
 	side[0].AddPoint(bottomBackLeftPoint + sideLength * forward);
 	side[0].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up);
 	side[0].AddPoint(bottomBackLeftPoint + sideLength * up);
 	side[0].CalculateNormal();
+	//*/
 
 	//Right Side
-	//side[1] = polygon();
 	side[1].AddPoint(bottomBackLeftPoint + sideLength * right);
 	side[1].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * right);
 	side[1].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up + sideLength * right);
@@ -38,35 +42,33 @@ void cube::CalculateSides() {
 	side[1].CalculateNormal();
 
 	//Up Side
-	//side[2] = polygon();
 	side[2].AddPoint(bottomBackLeftPoint + sideLength * up);
 	side[2].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up);
-	side[2].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * right);
 	side[2].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up + sideLength * right);
+	side[2].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * right);
 	side[2].CalculateNormal();
 
 	//Down Side
-	//side[3] = polygon();
 	side[3].AddPoint(bottomBackLeftPoint);
 	side[3].AddPoint(bottomBackLeftPoint + sideLength * forward);
-	side[3].AddPoint(bottomBackLeftPoint + sideLength * right);
 	side[3].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * right);
+	side[3].AddPoint(bottomBackLeftPoint + sideLength * right);
 	side[3].CalculateNormal();
 
 	//Back Side
 	//side[4] = polygon();
 	side[4].AddPoint(bottomBackLeftPoint);
 	side[4].AddPoint(bottomBackLeftPoint + sideLength * up);
-	side[4].AddPoint(bottomBackLeftPoint + sideLength * right);
 	side[4].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * right);
+	side[4].AddPoint(bottomBackLeftPoint + sideLength * right);
 	side[4].CalculateNormal();
 
 	//Forward Side
 	//side[5] = polygon();
 	side[5].AddPoint(bottomBackLeftPoint + sideLength * forward);
 	side[5].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * forward);
-	side[5].AddPoint(bottomBackLeftPoint + sideLength * right + sideLength * forward);
 	side[5].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * right + sideLength * forward);
+	side[5].AddPoint(bottomBackLeftPoint + sideLength * right + sideLength * forward);
 	side[5].CalculateNormal();
 }
 
@@ -99,4 +101,15 @@ bool cube::Intersect(const ray &R, intersection &inter)
 	} else {
 		return false;
 	}
+}
+void cube::SetMaterial(material &m) {
+	objectMat = &m;
+	for (int i = 0; i < 5; i++)
+		side[i].SetMaterial(&m);
+}
+
+void cube::SetMaterial(material *m) {
+	objectMat = m;
+	for (int i = 0; i < 5; i++)
+		side[i].SetMaterial(m);
 }

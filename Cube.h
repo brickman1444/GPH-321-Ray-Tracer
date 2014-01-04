@@ -15,6 +15,8 @@ public:
 	void SetBottomBackLeftPoint(point bblp) { bottomBackLeftPoint = bblp; }
 	void CalculateSides(void);
 	bool Intersect(const ray &R, intersection &I);
+	virtual void SetMaterial(material &m);
+	virtual void SetMaterial(material *m);
 
 private:
 	
