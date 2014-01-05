@@ -53,8 +53,12 @@ Application::Application()
 	Win.SetPaintEvent(this, &Application::UpdateWindow);
 	Win.Show();
 
+	ref.SetReflectiveIndex(.1);
+	ref.SetScene(s);
+
 	floor = plane(point(0,0,0), vector(0,0,1));
-	floor.SetMaterial(checks);
+	floor.SetMaterial(ref);
+	floor.SetColor(rgb::lightGray);
 	s.shapes.Append(&floor);
 
 	box = cube(point(2,3,0), vector(0,0,1), vector(1,1,0), 2); 
@@ -70,14 +74,14 @@ Application::Application()
 	wall_1 = plane(point(0,0,0), vector(1,0,0));
 	wall_1.SetShininess(20);
 	wall_1.SetSpecularColor(.2, .2, .2);
-	wall_1.SetColor(rgb::lightGray);
+	wall_1.SetColor(rgb::gray);
 	wall_1.SetMaterial(m);
 	s.shapes.Append(&wall_1);
 
 	wall_2 = plane(point(0,0,0), vector(0,1,0));
 	wall_2.SetShininess(20);
 	wall_2.SetSpecularColor(.2, .2, .2);
-	wall_2.SetColor(rgb::lightGray);
+	wall_2.SetColor(rgb::darkGray);
 	wall_2.SetMaterial(m);
 	s.shapes.Append(&wall_2);
 
@@ -115,7 +119,8 @@ Application::Application()
 	s.backgroundColor = rgb::green;
 
 	//s.DrawScene("test.bmp");
-	s.DrawSceneAntialias(10,10,"test10x10.bmp");
+	//s.DrawSceneAntialias(10,10,"test10x10.bmp");
+	s.DrawSceneMonteCarlo(2,"redCubeMonte100.bmp");
 }
 
 void Application::UpdateWindow(intRect UpdateRect)
