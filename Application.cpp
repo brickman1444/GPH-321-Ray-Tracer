@@ -25,9 +25,10 @@ private:
 	AppWindow	Win;
 
 	plane floor, ceiling, wall_1, wall_2, wall_3, wall_4;
-	cube box;
+	cube box1, box2, box3;
 	phongMaterial m;
 	reflectivePhong ref;
+	reflectiveCheckerboardPhong shinyChecks;
 	checkerboardPhong checks;
 	glass glassMat;
 	ambientLight amb;
@@ -56,15 +57,28 @@ Application::Application()
 	ref.SetReflectiveIndex(.1);
 	ref.SetScene(s);
 
+	shinyChecks.SetReflectiveIndex(.2);
+	shinyChecks.SetScene(s);
+
 	floor = plane(point(0,0,0), vector(0,0,1));
-	floor.SetMaterial(ref);
+	floor.SetMaterial(shinyChecks);
 	floor.SetColor(rgb::lightGray);
 	s.shapes.Append(&floor);
 
-	box = cube(point(2,3,0), vector(0,0,1), vector(1,1,0), 2); 
-	box.SetMaterial(m);
-	box.SetColor(rgb::red);
-	s.shapes.Append(&box);
+	box1 = cube(point(2,3,0), vector(0,0,1), vector(1,1,0), 2); 
+	box1.SetMaterial(m);
+	box1.SetColor(rgb::red);
+	s.shapes.Append(&box1);
+
+	box2 = cube(point(5,1,0), vector(0,0,1), vector(-.5,1,0), 1); 
+	box2.SetMaterial(m);
+	box2.SetColor(rgb::green);
+	s.shapes.Append(&box2);
+
+	box3 = cube(point(4,4,0), vector(0,0,1), vector(.1,1,0), .5); 
+	box3.SetMaterial(m);
+	box3.SetColor(rgb::blue);
+	s.shapes.Append(&box3);
 
 	ceiling = plane(point(0,0,10), vector(0,0,1));
 	ceiling.SetMaterial(checks);
@@ -120,7 +134,7 @@ Application::Application()
 
 	//s.DrawScene("test.bmp");
 	//s.DrawSceneAntialias(10,10,"test10x10.bmp");
-	s.DrawSceneMonteCarlo(2,"redCubeMonte100.bmp");
+	s.DrawSceneMonteCarlo(16,"tripleCube.bmp");
 }
 
 void Application::UpdateWindow(intRect UpdateRect)
