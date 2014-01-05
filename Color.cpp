@@ -35,6 +35,15 @@ rgb &rgb::operator*=(double d)
 	return *this;
 }
 
+rgb &rgb::operator/=(double d)
+{
+	SetR(r / d);
+	SetG(g / d);
+	SetB(b / d);
+
+	return *this;
+}
+
 rgb &rgb::operator*=(const rgb &c)
 {
 	SetR(r * c.r);
@@ -61,6 +70,16 @@ rgb operator*(const rgb &c, double d)
 rgb operator*(double d, const rgb &c)
 {
 	return rgb(c.r * d, c.g * d, c.b * d);
+}
+
+rgb operator/(double d, const rgb &c)
+{
+	return rgb(c.r / d, c.g / d, c.b / d);
+}
+
+rgb operator/(const rgb &c, double d)
+{
+	return rgb(c.r / d, c.g / d, c.b / d);
 }
 
 rgb operator*(const rgb &c1, const rgb &c2)

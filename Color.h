@@ -31,10 +31,13 @@ public:
 
 	rgb &operator*=(double d);
 	rgb &operator*=(const rgb &c1);
+	rgb &operator/=(double d);//
 	rgb &operator+=(const rgb &c1);
 
 	friend rgb operator*(const rgb &c, double d);
 	friend rgb operator*(double d, const rgb &c);
+	friend rgb operator/(const rgb &c, double d);//
+	friend rgb operator/(double d, const rgb &c);//
 	friend rgb operator*(const rgb &c1, const rgb &c2);
 	friend rgb operator+(const rgb &c1, const rgb &c2);
 	

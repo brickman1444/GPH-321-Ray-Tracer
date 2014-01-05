@@ -16,10 +16,10 @@ void cube::CalculateSides() {
 	// If right and up are the same direction or opposite directions, 
 	// forward have 0 length. 
 	vector forward = Cross(right, up);
-	//recreate right vector perpendicular to up and forward in case the 
-	//original right vector was not at a right angle to up
+	// recreate right vector perpendicular to up and forward in case the 
+	// original right vector was not at a right angle to up
 	vector right = Cross(up, forward);
-	//normalize all vectors so they can be used for calculating coordinates
+	// normalize all vectors so they can be used for calculating coordinates
 	right.Normalize();
 	up.Normalize();
 	forward.Normalize();
@@ -69,15 +69,14 @@ void cube::CalculateSides() {
 
 bool cube::Intersect(const ray &R, intersection &inter)
 {
-	//run the Intersect method for every side with different intersection objects
-	//compare the t's of the intersection objects and set the cube's intersection object to the earliest t
-	//return false if all intersects return false.
-
 	// Make an impossibly large t so that any intersection would be before it
 	inter.t = DBL_MAX;
 	intersection temp = inter;
 	bool anyIntersection = false;
 
+	// Run the Intersect method for every side with different intersection objects
+	// compare the t's of the intersection objects and set the cube's intersection object to the earliest t
+	// return false if all intersects return false.
 	for (int i = 0; i < 6; i++) {
 		if (side[i].Intersect(R, temp)) {
 			anyIntersection = true;
@@ -95,6 +94,7 @@ bool cube::Intersect(const ray &R, intersection &inter)
 		inter.shiny = shininess;
 		return true;
 	} else {
+		// if no intersection with any side
 		return false;
 	}
 }

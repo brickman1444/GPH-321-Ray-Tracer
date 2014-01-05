@@ -114,7 +114,8 @@ Application::Application()
 	s.windowH = 1.5;
 	s.backgroundColor = rgb::green;
 
-	s.DrawScene();
+	//s.DrawScene("test.bmp");
+	s.DrawSceneAntialias(10,10,"test10x10.bmp");
 }
 
 void Application::UpdateWindow(intRect UpdateRect)
