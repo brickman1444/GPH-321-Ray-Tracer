@@ -57,7 +57,7 @@ Application::Application()
 	floor.SetMaterial(checks);
 	s.shapes.Append(&floor);
 
-	box = cube(point(0,0,0), vector(0,0,1), vector(0,1,0), 2); 
+	box = cube(point(2,3,0), vector(0,0,1), vector(1,1,0), 2); 
 	box.SetMaterial(m);
 	box.SetColor(rgb::red);
 	s.shapes.Append(&box);
@@ -69,26 +69,28 @@ Application::Application()
 
 	wall_1 = plane(point(0,0,0), vector(1,0,0));
 	wall_1.SetShininess(20);
-	wall_1.SetSpecularColor(.4, .4, .4);
+	wall_1.SetSpecularColor(.2, .2, .2);
+	wall_1.SetColor(rgb::lightGray);
 	wall_1.SetMaterial(m);
-	//s.shapes.Append(&wall_1);
+	s.shapes.Append(&wall_1);
 
 	wall_2 = plane(point(0,0,0), vector(0,1,0));
 	wall_2.SetShininess(20);
-	wall_2.SetSpecularColor(.4, .4, .4);
+	wall_2.SetSpecularColor(.2, .2, .2);
+	wall_2.SetColor(rgb::lightGray);
 	wall_2.SetMaterial(m);
-	//s.shapes.Append(&wall_2);
+	s.shapes.Append(&wall_2);
 
 	wall_3 = plane(point(10,0,0), vector(1,0,0));
 	wall_3.SetShininess(20);
-	wall_3.SetSpecularColor(.4, .4, .4);
+	wall_3.SetSpecularColor(.2, .2, .2);
 	wall_3.SetMaterial(m);
 	wall_3.SetCanShadow(false);
 	//s.shapes.Append(&wall_3);
 
 	wall_4 = plane(point(0,10,0), vector(0,1,0));
 	wall_4.SetShininess(20);
-	wall_4.SetSpecularColor(.4, .4, .4);
+	wall_4.SetSpecularColor(.2, .2, .2);
 	wall_4.SetMaterial(m);
 	wall_4.SetCanShadow(false);
 	//s.shapes.Append(&wall_4);
@@ -100,11 +102,11 @@ Application::Application()
 	light_1.SetAngleLimits(360, 360);
 	light_1.SetShadowColor(rgb(.5, .5, .5));*/
 	//light_1 = distantLight(vector(0,0,-1), rgb::white, rgb::white, rgb::lightGray, true); 
-	light_1 = pointLight(point(5,5,5), rgb(.8,.8,.8), rgb::white, rgb(.2,.2,.2), true);
+	light_1 = pointLight(point(7,7,7), rgb(.9,.9,.9), rgb::white, rgb(.1,.1,.1), true);
 	s.lights.Append(&light_1);
 
-	s.camera = point(10, 5, 10);
-	s.target = point(0, 0, 0);
+	s.camera = point(10, 5, 5);
+	s.target = point(2, 2, 0);
 	s.up = vector(0, 0, 1);
 	s.win = &Win;
 	s.windowD = 2;

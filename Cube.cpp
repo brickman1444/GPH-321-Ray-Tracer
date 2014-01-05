@@ -25,14 +25,11 @@ void cube::CalculateSides() {
 	forward.Normalize();
 
 	//Left Side
-	//side[0] = polygon();
-	///*
 	side[0].AddPoint(bottomBackLeftPoint);
 	side[0].AddPoint(bottomBackLeftPoint + sideLength * forward);
 	side[0].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up);
 	side[0].AddPoint(bottomBackLeftPoint + sideLength * up);
 	side[0].CalculateNormal();
-	//*/
 
 	//Right Side
 	side[1].AddPoint(bottomBackLeftPoint + sideLength * right);
@@ -56,7 +53,6 @@ void cube::CalculateSides() {
 	side[3].CalculateNormal();
 
 	//Back Side
-	//side[4] = polygon();
 	side[4].AddPoint(bottomBackLeftPoint);
 	side[4].AddPoint(bottomBackLeftPoint + sideLength * up);
 	side[4].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * right);
@@ -64,7 +60,6 @@ void cube::CalculateSides() {
 	side[4].CalculateNormal();
 
 	//Forward Side
-	//side[5] = polygon();
 	side[5].AddPoint(bottomBackLeftPoint + sideLength * forward);
 	side[5].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * forward);
 	side[5].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * right + sideLength * forward);
@@ -78,7 +73,8 @@ bool cube::Intersect(const ray &R, intersection &inter)
 	//compare the t's of the intersection objects and set the cube's intersection object to the earliest t
 	//return false if all intersects return false.
 
-	inter.t = 9e60;
+	// Make an impossibly large t so that any intersection would be before it
+	inter.t = DBL_MAX;
 	intersection temp = inter;
 	bool anyIntersection = false;
 
