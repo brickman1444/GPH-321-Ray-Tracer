@@ -31,6 +31,7 @@ private:
 	reflectivePhong ref;
 	reflectiveCheckerboardPhong shinyChecks;
 	checkerboardPhong checks;
+	rainbowPhong rainbow;
 	glass glassMat;
 	ambientLight amb;
 	pointLight light_1;
@@ -71,9 +72,9 @@ Application::Application()
 	box1.SetColor(rgb::red);
 	s.shapes.Append(&box1);
 
-	box2 = cube(point(5,1,0), vector(0,0,1), vector(-.5,1,0), 1); 
-	box2.SetMaterial(m);
-	box2.SetColor(rgb::green);
+	box2 = cube(point(5,1,0), vector(0,0,1), vector(0,1,0), 2); 
+	box2.SetMaterial(rainbow);
+	box2.SetColor(rgb::white);
 	s.shapes.Append(&box2);
 
 	box3 = cube(point(4,4.75,0), vector(0,0,1), vector(.1,1,0), .5); 
@@ -140,19 +141,23 @@ Application::Application()
 
 	s.camera = point(10, 5, 5);
 	s.target = point(2, 2, 0);
+
+	//s.camera = point(4, 0, 2);
+	//s.target = point(5, 1, 1);
+
 	s.up = vector(0, 0, 1);
 	s.win = &Win;
 	s.windowD = 2;
 	s.windowW = 1.5;
 	s.windowH = 1.5;
 
-	s.backgroundColor = rgb::green;
+	//s.backgroundColor = rgb::green;
 
-	s.DrawScene();
+	//s.DrawScene();
 	//s.DrawScene("test.bmp");
-	//s.DrawSceneAntialias(10,10,"test10x10.bmp");
+	//s.DrawSceneAntialias(1,1,"test10x10.bmp");
 	//s.DrawSceneMonteCarlo(100,"test2.bmp");
-	s.DrawSceneMonteCarloAdvanced(4, 100, .01, "test1.bmp");
+	s.DrawSceneMonteCarloAdvanced(4, 32, .01, "test1.bmp");
 	//s.DrawSceneEdgeDetect( .01, "test1.bmp");
 }
 
