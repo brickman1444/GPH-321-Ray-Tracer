@@ -222,24 +222,85 @@ void checkerboardPhong::ReflectedColor(rgb& outA, rgb &outD, rgb &outS,
 	ix = int(fmod(inter.p[0], 2*checkL) / (checkL));
 	ix += int(fmod(inter.p[1], 2*checkW) / (checkW));
 
-	if (inter.p[0] < 0) {
-		ix++;
-	}
-
-	if (inter.p[1] < 0) {
-		ix++;
-	}
-
 	// 3D checkerboard. Looks kinda bad on a sphere.
 	// Leave commented out to get only a planar 
 	// checkerboard from above with vertical stripes on vertical planes
 	//ix += int(fmod(inter.p[2], 2*checkH) / (checkH));
+
+	if (inter.p[0] < 0)
+		ix++;
+	if (inter.p[1] < 0)
+		ix++;
 
 	// Override the surface color in the intersection data
 	if (ix % 2 == 0)
 		tmp.diff = cDark;
 	else
 		tmp.diff = cLight;
+
+	phongMaterial::ReflectedColor(outA, outD, outS, lightVal, tmp);
+}
+
+void reflectiveCheckerboardPhong::ReflectedColor(rgb& outA, rgb &outD, rgb &outS, 
+									   const lightOutput &lightVal, const intersection &inter)
+{
+	outA = rgb::black;
+	outD = rgb::tan;  
+	outS = rgb::black; 
+
+	intersection tmp = inter;
+	int ix = 0;
+
+	// x,y,z
+	// length,width,height
+	ix = int(fmod(inter.p[0], 2*checkL) / (checkL));
+	ix += int(fmod(inter.p[1], 2*checkW) / (checkW));
+
+	// 3D checkerboard. Looks kinda bad on a sphere.
+	// Leave commented out to get only a planar 
+	// checkerboard from above with vertical stripes on vertical planes
+	//ix += int(fmod(inter.p[2], 2*checkH) / (checkH));
+
+	if (inter.p[0] < 0)
+		ix++;
+	if (inter.p[1] < 0)
+		ix++;
+
+	// Override the surface color in the intersection data
+	if (ix % 2 == 0)
+		tmp.diff *= cDark;
+	else
+		tmp.diff *= cLight;
+
+	reflectivePhong::ReflectedColor(outA, outD, outS, lightVal, tmp);
+}
+
+void rainbowPhong::ReflectedColor(rgb& outA, rgb &outD, rgb &outS, 
+									   const lightOutput &lightVal, const intersection &inter)
+{
+	outA = rgb::black;
+	outD = rgb::tan;  
+	outS = rgb::black; 
+
+	intersection tmp = inter;
+
+	// x,y,z
+	// length,width,height
+	// r,g,b
+	double red = fabs((fmod(inter.p[0], 2*periodL) / periodL) - 1);
+	double green = fabs((fmod(inter.p[1], 2*periodW) / periodW) - 1);
+	double blue = fabs((fmod(inter.p[2], 2*periodH) / periodH) - 1);
+
+	/*if (IsZero(red) && Dot(inter.v, vector(1,0,0)) > 0)
+		red = 1;
+	if (IsZero(green) && Dot(inter.v, vector(0,1,0)) > 0)
+		green = 1;
+	if (IsZero(blue) && Dot(inter.v, vector(0,0,1)) > 0)
+		blue = 1;
+	*/
+
+	// Override the surface color in the intersection data
+		tmp.diff *= rgb(red, green, blue);
 
 	phongMaterial::ReflectedColor(outA, outD, outS, lightVal, tmp);
 }

@@ -49,8 +49,6 @@ bool IsNormal(const point &p)
 
 double Distance(const point &p, const point &q)
 {
-	// To Do
-	//
 	// Calculate the distance between the two points
 	return sqrt(sqr(p[0] - q[0])+sqr(p[1] - q[1])+sqr(p[2] - q[2]));
 }

@@ -72,9 +72,11 @@ Application::Application()
 	box1.SetColor(rgb::red);
 	s.shapes.Append(&box1);
 
-	box2 = cube(point(5,1,0), vector(0,0,1), vector(0,1,0), 2); 
+	box2 = cube(point(0,0,0), vector(0,0,1), vector(0,1,0), 1); 
 	box2.SetMaterial(rainbow);
 	box2.SetColor(rgb::white);
+	box2.SetTranslation(5,1,0);
+	box2.SetScale(1,2,.5);
 	s.shapes.Append(&box2);
 
 	box3 = cube(point(4,4.75,0), vector(0,0,1), vector(.1,1,0), .5); 
@@ -82,9 +84,9 @@ Application::Application()
 	box3.SetColor(rgb::blue);
 	s.shapes.Append(&box3);
 
-	globe1.SetCenter(point(3.5,3,2.75));
+	globe1.SetTranslation(3.5,3,2.75);
 	globe1.SetRadius(.75);
-	globe1.SetMaterial(m);
+	globe1.SetMaterial(rainbow);
 	globe1.SetShininess(10);
 	globe1.SetColor(rgb::orange);
 	s.shapes.Append(&globe1);
@@ -153,11 +155,11 @@ Application::Application()
 
 	//s.backgroundColor = rgb::green;
 
-	//s.DrawScene();
+	s.DrawScene();
 	//s.DrawScene("test.bmp");
 	//s.DrawSceneAntialias(1,1,"test10x10.bmp");
 	//s.DrawSceneMonteCarlo(100,"test2.bmp");
-	s.DrawSceneMonteCarloAdvanced(4, 32, .01, "test1.bmp");
+	//s.DrawSceneMonteCarloAdvanced(4, 32, .01, "test1.bmp");
 	//s.DrawSceneEdgeDetect( .01, "test1.bmp");
 }
 

@@ -131,7 +131,6 @@ protected:
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // A simple checkerboard pattern material derived from phong
 /////////////////////////////////////////////////////////////////////////////////////////////////
-
 class checkerboardPhong : public phongMaterial
 {
 public:
@@ -147,6 +146,22 @@ protected:
 
 	double checkL, checkW, checkH;
 	rgb cDark, cLight;
+};
+
+// Texture that correlates the color dimensions to xyz coordinates
+class rainbowPhong : public phongMaterial
+{
+public:
+
+	rainbowPhong(double pL = 1, double pW = 1, double pH = 1)
+			{ periodL = pL; periodW = pW; periodH = pH; }
+
+	void ReflectedColor(rgb& outA, rgb &outD, rgb &outS, 
+						const lightOutput &lightVal, const intersection &inter);
+
+protected:
+
+	double periodL, periodW, periodH;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -192,6 +207,22 @@ protected:
 	
 	scene *world;
 	double reflectiveIndex;
+};
+
+class reflectiveCheckerboardPhong : public reflectivePhong
+{
+public:
+
+	reflectiveCheckerboardPhong(double cL = 1, double cW = 1, double cH = 1, 
+					  const rgb &CDark = rgb::black, const rgb &CLight = rgb::white)
+	{ checkL = cL; checkW = cW; checkH = cH; cDark = CDark; cLight = CLight; }
+
+	void ReflectedColor(rgb& outA, rgb &outD, rgb &outS, const lightOutput &lightVal, const intersection &inter);
+
+protected:
+
+	double checkL, checkW, checkH;
+	rgb cDark, cLight;
 };
 
 class glass : public material

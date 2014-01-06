@@ -19,6 +19,8 @@ public:
 	void DrawScene(char *outputFileName = NULL);
 	void DrawSceneAntialias(int xSamples, int ySamples, char *outputFileName = NULL);
 	void DrawSceneMonteCarlo(int samples, char *outputFileName = NULL);
+	void DrawSceneMonteCarloAdvanced(int minSamples, int maxSamples, double differenceThreshold, char *outputFileName = NULL);
+	void DrawSceneEdgeDetect(double differenceThreshold = .01, char *outputFileName = NULL);
 	void CopySceneToWindow(void);
 
 	// This casts a ray and returns an intersection, but no color is applied
