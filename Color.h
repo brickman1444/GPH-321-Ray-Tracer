@@ -36,8 +36,7 @@ public:
 
 	friend rgb operator*(const rgb &c, double d);
 	friend rgb operator*(double d, const rgb &c);
-	friend rgb operator/(const rgb &c, double d);//
-	friend rgb operator/(double d, const rgb &c);//
+	friend rgb operator/(const rgb &c, double d);
 	friend rgb operator*(const rgb &c1, const rgb &c2);
 	friend rgb operator+(const rgb &c1, const rgb &c2);
 	
@@ -77,5 +76,8 @@ inline ostream &operator<<(ostream &output, const rgb &c)
 	output << c.R() << ", " << c.G() << ", " << c.B() << ")" << endl;
 	return output;
 }
+
+//Distance in 3D colorspace
+double Distance(const rgb &c1, const rgb &c2);
 
 #endif

@@ -1,5 +1,6 @@
 
 #include "color.h"
+#include <Jmisc.h> // Miscellaneous routines, including sqr()
 
 rgb rgb::white(1.0, 1.0, 1.0);
 rgb rgb::lightGray(.75, .75, .75);
@@ -72,11 +73,6 @@ rgb operator*(double d, const rgb &c)
 	return rgb(c.r * d, c.g * d, c.b * d);
 }
 
-rgb operator/(double d, const rgb &c)
-{
-	return rgb(c.r / d, c.g / d, c.b / d);
-}
-
 rgb operator/(const rgb &c, double d)
 {
 	return rgb(c.r / d, c.g / d, c.b / d);
@@ -90,5 +86,10 @@ rgb operator*(const rgb &c1, const rgb &c2)
 rgb operator+(const rgb &c1, const rgb &c2)
 {
 	return rgb(c1.r + c2.r, c1.g + c2.g, c1.b + c2.b);
+}
+
+double Distance(const rgb &c1, const rgb &c2)
+{
+	return sqrt(sqr(c1.R() - c2.R())+sqr(c1.G() - c2.G())+sqr(c1.B() - c2.B()));
 }
 

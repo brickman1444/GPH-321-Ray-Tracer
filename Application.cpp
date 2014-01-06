@@ -26,6 +26,7 @@ private:
 
 	plane floor, ceiling, wall_1, wall_2, wall_3, wall_4;
 	cube box1, box2, box3;
+	sphere globe1, globe2;
 	phongMaterial m;
 	reflectivePhong ref;
 	reflectiveCheckerboardPhong shinyChecks;
@@ -75,10 +76,24 @@ Application::Application()
 	box2.SetColor(rgb::green);
 	s.shapes.Append(&box2);
 
-	box3 = cube(point(4,4,0), vector(0,0,1), vector(.1,1,0), .5); 
+	box3 = cube(point(4,4.75,0), vector(0,0,1), vector(.1,1,0), .5); 
 	box3.SetMaterial(m);
 	box3.SetColor(rgb::blue);
 	s.shapes.Append(&box3);
+
+	globe1.SetCenter(point(3.5,3,2.75));
+	globe1.SetRadius(.75);
+	globe1.SetMaterial(m);
+	globe1.SetShininess(10);
+	globe1.SetColor(rgb::orange);
+	s.shapes.Append(&globe1);
+
+	globe2.SetCenter(point(5,4,.5));
+	globe2.SetRadius(.5);
+	globe2.SetMaterial(m);
+	globe2.SetShininess(10);
+	globe2.SetColor(rgb::cyan);
+	s.shapes.Append(&globe2);
 
 	ceiling = plane(point(0,0,10), vector(0,0,1));
 	ceiling.SetMaterial(checks);
@@ -88,14 +103,14 @@ Application::Application()
 	wall_1 = plane(point(0,0,0), vector(1,0,0));
 	wall_1.SetShininess(20);
 	wall_1.SetSpecularColor(.2, .2, .2);
-	wall_1.SetColor(rgb::gray);
+	wall_1.SetColor(rgb::white);
 	wall_1.SetMaterial(m);
 	s.shapes.Append(&wall_1);
 
 	wall_2 = plane(point(0,0,0), vector(0,1,0));
 	wall_2.SetShininess(20);
 	wall_2.SetSpecularColor(.2, .2, .2);
-	wall_2.SetColor(rgb::darkGray);
+	wall_2.SetColor(rgb::lightGray);
 	wall_2.SetMaterial(m);
 	s.shapes.Append(&wall_2);
 
@@ -130,11 +145,15 @@ Application::Application()
 	s.windowD = 2;
 	s.windowW = 1.5;
 	s.windowH = 1.5;
+
 	s.backgroundColor = rgb::green;
 
+	s.DrawScene();
 	//s.DrawScene("test.bmp");
 	//s.DrawSceneAntialias(10,10,"test10x10.bmp");
-	s.DrawSceneMonteCarlo(16,"tripleCube.bmp");
+	//s.DrawSceneMonteCarlo(100,"test2.bmp");
+	s.DrawSceneMonteCarloAdvanced(4, 100, .01, "test1.bmp");
+	//s.DrawSceneEdgeDetect( .01, "test1.bmp");
 }
 
 void Application::UpdateWindow(intRect UpdateRect)
