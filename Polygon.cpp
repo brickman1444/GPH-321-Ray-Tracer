@@ -3,7 +3,7 @@
 
 bool polygon::Intersect(const ray &R, intersection &inter)
 {
-	// To Do: If you have implemented the "CalculateNormal" method 
+	// If you have implemented the "CalculateNormal" method 
 	// below, then the normal should already be calculated and placed 
 	// in the member "n".
 	//

@@ -9,10 +9,11 @@ class cube : public shape
 {
 public:
 
-	cube(point p = point(0,0,0), vector u = vector(0,0,1), vector r = vector(0,1,0), double len = 1);
+	cube() : bottomBackLeftPoint(0,0,0), up(0,0,1), right(0,1,0), sideLength(1) { }
 	void SetUp(vector u) { up = u; }
 	void SetRight(vector r) { right = r; }
 	void SetBottomBackLeftPoint(point bblp) { bottomBackLeftPoint = bblp; }
+	void SetSideLength(double d) { sideLength = d; }
 	void CalculateSides(void);
 	bool Intersect(const ray &R, intersection &I);
 	virtual void SetMaterial(material &m);

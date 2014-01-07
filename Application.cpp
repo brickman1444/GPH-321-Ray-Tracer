@@ -67,21 +67,28 @@ Application::Application()
 	floor.SetColor(rgb::lightGray);
 	s.shapes.Append(&floor);
 
-	box1 = cube(point(2,3,0), vector(0,0,1), vector(1,1,0), 2); 
+	box1.SetSideLength(2);
+	box1.SetTranslation(2,3,0);
+	box1.SetZRotation(45);
+	box1.SetYRotation(-45);
+	box1.SetXRotation(-45);
 	box1.SetMaterial(m);
 	box1.SetColor(rgb::red);
+	box1.CalculateSides();
 	s.shapes.Append(&box1);
-
-	box2 = cube(point(0,0,0), vector(0,0,1), vector(0,1,0), 1); 
+	
 	box2.SetMaterial(rainbow);
 	box2.SetColor(rgb::white);
 	box2.SetTranslation(5,1,0);
 	box2.SetScale(1,2,.5);
+	box2.CalculateSides();
 	s.shapes.Append(&box2);
 
-	box3 = cube(point(4,4.75,0), vector(0,0,1), vector(.1,1,0), .5); 
+	box3.SetTranslation(4,4.75,0);
+	box3.SetSideLength(.5);
 	box3.SetMaterial(m);
 	box3.SetColor(rgb::blue);
+	box3.CalculateSides();
 	s.shapes.Append(&box3);
 
 	globe1.SetTranslation(3.5,3,2.75);
@@ -91,7 +98,7 @@ Application::Application()
 	globe1.SetColor(rgb::orange);
 	s.shapes.Append(&globe1);
 
-	globe2.SetCenter(point(5,4,.5));
+	globe2.SetTranslation(5,4,.5);
 	globe2.SetRadius(.5);
 	globe2.SetMaterial(m);
 	globe2.SetShininess(10);

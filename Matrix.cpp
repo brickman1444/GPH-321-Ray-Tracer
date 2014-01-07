@@ -120,67 +120,64 @@ matrix matrix::Transpose()
 
 void matrix::MakeRotationX(double alpha)
 {
+	//set up a matrix that rotates by an angle alpha about the x-axis
 	alpha *= PI/180;
 	double mData[] = {1,0,0,0,
 					  0,cos(alpha),-1*sin(alpha),0,
 					  0,sin(alpha),cos(alpha),0,
 					  0,0,0,1};
 	(*this) = matrix(4, 4, mData);
-
-	// to do:  set up a matrix that rotates by an angle alpha about the x-axis
 }
 
 void matrix::MakeRotationY(double alpha)
 {
+	//set up a matrix that rotates by an angle alpha about the y-axis
 	alpha *= PI/180;
 	double mData[] = {cos(alpha),0,sin(alpha),0,
 					  0,1,0,0,
 					  -1*sin(alpha),0,cos(alpha),0,
 					  0,0,0,1};
 	(*this) = matrix(4, 4, mData);
-	// to do:  set up a matrix that rotates by an angle alpha about the y-axis
 }
 
 void matrix::MakeRotationZ(double alpha)
 {
+	//set up a matrix that rotates by an angle alpha about the z-axis
 	alpha *= PI/180;
 	double mData[] = {cos(alpha),-1*sin(alpha),0,0,
 					  sin(alpha),cos(alpha),0,0,
 					  0,0,1,0,
 					  0,0,0,1};
 	(*this) = matrix(4, 4, mData);
-	// to do:  set up a matrix that rotates by an angle alpha about the z-axis
 }
 
 void matrix::MakeRotation(double alpha, const vector &v)
 {
-	(*this) = matrix(4, 4, 1.0);
-
-	// to do:  set up matrix that rotates about
+	// to do: set up matrix that rotates about
 	// an arbitrary axis v by an angle alpha
+	(*this) = matrix(4, 4, 1.0);
 }
 
 void matrix::MakeScale(double x, double y, double z)
 {
+	// set up a matrix that scales by a factor x along the x-axis, 
+	//                      scales by a factor y along the y-axis,
+	//                  and scales by a factor z along the z-axis
 	double mData[] = {x,0,0,0,
 					  0,y,0,0,
 					  0,0,z,0,
 					  0,0,0,1};
 	(*this) = matrix(4, 4, mData);
-    // to do:  set up a matrix that scales by a factor x along the x-axis, 
-	//                              scales by a factor y along the y-axis,
-	//                          and scales by a factor z along the z-axis
 }
 
 void matrix::MakeTranslation(double x, double y, double z)
 {
+	//set up a matrix that translates by (x, y, z)
 	double mData[] = {1,0,0,x,
 					  0,1,0,y,
 					  0,0,1,z,
 					  0,0,0,1};
 	(*this) = matrix(4, 4, mData);
-
-	// to do:  set up a matrix that translates by (x, y, z)
 }
 
 matrix matrix::Identity(int size) { return matrix(size, size, 1.0); }
@@ -197,7 +194,7 @@ matrix matrix::Translation(double x, double y, double z) { matrix m(4, 4); m.Mak
 // what the number of rows and columns in the matrices are!
 bool IsZero(const matrix &m)
 {
-	// to do:  Check that all elements of m
+	// Check that all elements of m
 	// are (floating point) equal to zero
 
 	for (int i = 0; i < m.Rows(); i++) {

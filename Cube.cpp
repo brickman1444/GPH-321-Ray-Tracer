@@ -3,14 +3,6 @@
 #include "Polygon.h"
 #include "material.h"
 
-cube::cube(point p, vector u, vector r, double len) { 
-	bottomBackLeftPoint = p; 
-	up = u; 
-	right = r; 
-	sideLength = len; 
-	CalculateSides();
-}
-
 void cube::CalculateSides() {
 	// Create forward vector perpendicular to right and up
 	// If right and up are the same direction or opposite directions, 

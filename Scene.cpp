@@ -95,14 +95,6 @@ bool scene::CastRay(const ray &r, intersection &inter)
 		if (s->CalculateIntersection(r, tmp)) {
 			if (tmp.t < inter.t) {
 				inter = tmp;
-				/*inter.diff = tmp.diff;
-				inter.n = tmp.n;
-				inter.p = tmp.p;
-				inter.shiny = tmp.shiny;
-				inter.spec = tmp.spec;
-				inter.t = tmp.t;
-				inter.tex = tmp.tex;
-				inter.v = tmp.v;*/
 				inter.w = this;
 				found = true;
 			}
