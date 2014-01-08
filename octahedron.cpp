@@ -22,7 +22,7 @@ bool octahedron::Intersect(const ray &R, intersection &inter)
 	}
 	//4
 	if (!IsZero(R.v[0] - R.v[1] - R.v[2])) {
-		t[3] = (radius + R.p[0] + R.p[1] + R.p[2]) / (R.v[0] - R.v[1] - R.v[2]);
+		t[3] = (radius - R.p[0] + R.p[1] + R.p[2]) / (R.v[0] - R.v[1] - R.v[2]);
 	}
 	//5
 	if (!IsZero(-R.v[0] + R.v[1] + R.v[2])) {
@@ -46,8 +46,21 @@ bool octahedron::Intersect(const ray &R, intersection &inter)
 
 	for (int i = 0; i < 8; i++) {
 		if (t[i] > 0 && t[i] < inter.t) {
-			found = true;
-			inter.t = t[i];
+			inter.p = R.PointOnRay(t[i]);
+			if (IsEqual(fabs(inter.p[0]) + fabs(inter.p[1]) + fabs(inter.p[2]),radius)) {
+				found = true;
+				inter.t = t[i];
+				switch (i) {
+					case 0: inter.n = vector(1,1,1); break;
+					case 1: inter.n = vector(1,1,-1); break;
+					case 2: inter.n = vector(1,-1,1); break;
+					case 3: inter.n = vector(1,-1,-1); break;
+					case 4: inter.n = vector(-1,1,1); break;
+					case 5: inter.n = vector(-1,1,-1); break;
+					case 6: inter.n = vector(-1,-1,1); break;
+					case 7: inter.n = vector(-1,-1,-1); break;
+				}
+			}
 		}
 	}
 
@@ -57,7 +70,7 @@ bool octahedron::Intersect(const ray &R, intersection &inter)
 
 	// Point and normal of intersection
 	inter.p = R.PointOnRay(inter.t);
-	inter.n = inter.p - point(0,0,0);
+	//inter.n = inter.p - point(0,0,0);
 
 	// Other data needed by the tracer
 	inter.s = this;

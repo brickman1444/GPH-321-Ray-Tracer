@@ -65,22 +65,23 @@ Application::Application()
 	shinyChecks.SetScene(s);
 
 	floor = plane(point(0,0,0), vector(0,0,1));
-	floor.SetMaterial(shinyChecks);
+	floor.SetMaterial(m);
 	floor.SetColor(rgb::lightGray);
 	s.shapes.Append(&floor);
 
 	light_1 = pointLight(point(7,7,7), rgb(.9,.9,.9), rgb::white, rgb(.1,.1,.1), true);
 	s.lights.Append(&light_1);
 
-	s.camera = point(10, 0, 5);
+	s.camera = point(5, 6, 5);
 	s.target = point(0, 0, 0);
 
-	//octo.SetMaterial();
+	octo.SetMaterial(rainbow);
+	octo.SetRadius(2);
 	octo.SetColor(rgb::gray);
-	//s.shapes.Append(&octo);
+	s.shapes.Append(&octo);
 
 	globe1.SetMaterial(m);
-	s.shapes.Append(&globe1);
+	//s.shapes.Append(&globe1);
 
 	s.up = vector(0, 0, 1);
 	s.win = &Win;
