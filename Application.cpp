@@ -69,12 +69,10 @@ Application::Application()
 
 	box1.SetSideLength(2);
 	box1.SetTranslation(2,3,0);
-	box1.SetZRotation(45);
-	box1.SetYRotation(-45);
-	box1.SetXRotation(-45);
 	box1.SetMaterial(m);
 	box1.SetColor(rgb::red);
 	box1.CalculateSides();
+
 	s.shapes.Append(&box1);
 	
 	box2.SetMaterial(rainbow);
@@ -164,9 +162,9 @@ Application::Application()
 
 	s.DrawScene();
 	//s.DrawScene("test.bmp");
-	//s.DrawSceneAntialias(1,1,"test10x10.bmp");
+	//s.DrawSceneAntialias(4,4,"test10x10.bmp");
 	//s.DrawSceneMonteCarlo(100,"test2.bmp");
-	//s.DrawSceneMonteCarloAdvanced(4, 32, .01, "test1.bmp");
+	//s.DrawSceneMonteCarloAdvanced(4, 16, .01, "test1.bmp");
 	//s.DrawSceneEdgeDetect( .01, "test1.bmp");
 }
 

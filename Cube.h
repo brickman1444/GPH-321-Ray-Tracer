@@ -19,11 +19,12 @@ public:
 	virtual void SetMaterial(material &m);
 	virtual void SetMaterial(material *m);
 
+	polygon side[6];// 0=leftSide; 1=rightSide; 2=upSide; 3=downSide; 4=forwardSide; 5=backSide;
+
 private:
 	
 	point bottomBackLeftPoint;// The anchor point in the corner of the cube
 	vector up, right;// vectors used to build out the cube from the corner. forward is constructed in CalculateSides()
-	polygon side[6];// 0=leftSide; 1=rightSide; 2=upSide; 3=downSide; 4=forwardSide; 5=backSide;
 	double sideLength;
 };
 
