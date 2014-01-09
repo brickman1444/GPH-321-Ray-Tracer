@@ -26,9 +26,10 @@ private:
 	AppWindow	Win;
 
 	plane floor, ceiling, wall_1, wall_2, wall_3, wall_4;
+	polygon poly;
 	cube box1, box2, box3;
 	sphere globe1, globe2;
-	octahedron octo;
+	octahedron octo1, octo2, octo3;
 	phongMaterial m;
 	reflectivePhong ref;
 	reflectiveCheckerboardPhong shinyChecks;
@@ -65,20 +66,39 @@ Application::Application()
 	shinyChecks.SetScene(s);
 
 	floor = plane(point(0,0,0), vector(0,0,1));
-	floor.SetMaterial(m);
+	floor.SetMaterial(shinyChecks);
 	floor.SetColor(rgb::lightGray);
 	s.shapes.Append(&floor);
 
-	light_1 = pointLight(point(7,7,7), rgb(.9,.9,.9), rgb::white, rgb(.1,.1,.1), true);
+	light_1 = pointLight(point(7,-7,7), rgb(.9,.9,.9), rgb::white, rgb(.1,.1,.1), true);
 	s.lights.Append(&light_1);
 
-	s.camera = point(5, 6, 5);
+	s.camera = point(5, 4, 3);
 	s.target = point(0, 0, 0);
 
-	octo.SetMaterial(rainbow);
-	octo.SetRadius(2);
-	octo.SetColor(rgb::gray);
-	s.shapes.Append(&octo);
+	octo1.SetMaterial(rainbow);
+	octo1.SetRadius(1);
+	octo1.SetTranslation(2,1,.25);
+	octo1.SetXRotation(45);
+	octo1.SetScale(.25,.25,.25);
+
+	octo1.SetColor(rgb::white);
+	s.shapes.Append(&octo1);
+
+	octo2.SetMaterial(rainbow);
+	octo2.SetTranslation(0,0,1);
+	
+	octo2.SetColor(rgb::offWhite);
+	s.shapes.Append(&octo2);
+
+	octo3.SetMaterial(ref);
+	octo3.SetTranslation(1,2,.5);
+	octo3.SetXRotation(25);
+	octo3.SetZRotation(10);
+	octo3.SetScale(.5,.5,.5);
+
+	octo3.SetColor(rgb::red);
+	s.shapes.Append(&octo3);
 
 	globe1.SetMaterial(m);
 	//s.shapes.Append(&globe1);
@@ -95,7 +115,7 @@ Application::Application()
 	//s.DrawScene("test.bmp");
 	//s.DrawSceneAntialias(4,4,"test10x10.bmp");
 	//s.DrawSceneMonteCarlo(100,"test2.bmp");
-	//s.DrawSceneMonteCarloAdvanced(4, 16, .01, "test1.bmp");
+	//s.DrawSceneMonteCarloAdvanced(4, 32, .01, "test1.bmp");
 	//s.DrawSceneEdgeDetect( .01, "test1.bmp");
 }
 

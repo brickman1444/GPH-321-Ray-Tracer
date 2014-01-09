@@ -72,7 +72,7 @@ public:
 	void SetScale(const vector &s);
 
 	// Method for transforming. Is cumulative with all transformations so far.
-	void Transform(matrix m) {totalTransform = m * totalTransform; RecalculateMatrices(); }
+	//void Transform(matrix m) {totalTransform = m * totalTransform; RecalculateMatrices(); }
 
 	// Resets total transformation to the identity matrix.
 	void ResetTransformations(void) {totalTransform = matrix::Identity(4); }
