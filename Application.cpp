@@ -83,12 +83,14 @@ Application::Application()
 	octo1.SetScale(.25,.25,.25);
 
 	octo1.SetColor(rgb::white);
-	s.shapes.Append(&octo1);
+	//s.shapes.Append(&octo1);
 
 	octo2.SetMaterial(rainbow);
 	octo2.SetTranslation(0,0,1);
 	
 	octo2.SetColor(rgb::offWhite);
+	octo2.SetScale(.25,.25,1);
+	octo2.SetRotation(0,0,20);
 	s.shapes.Append(&octo2);
 
 	octo3.SetMaterial(ref);
@@ -98,7 +100,7 @@ Application::Application()
 	octo3.SetScale(.5,.5,.5);
 
 	octo3.SetColor(rgb::red);
-	s.shapes.Append(&octo3);
+	//s.shapes.Append(&octo3);
 
 	globe1.SetMaterial(m);
 	//s.shapes.Append(&globe1);
@@ -115,7 +117,7 @@ Application::Application()
 	//s.DrawScene("test.bmp");
 	//s.DrawSceneAntialias(4,4,"test10x10.bmp");
 	//s.DrawSceneMonteCarlo(100,"test2.bmp");
-	//s.DrawSceneMonteCarloAdvanced(4, 32, .01, "test1.bmp");
+	//s.DrawSceneMonteCarloAdvanced(16, 32, .01, "test1.bmp");
 	//s.DrawSceneEdgeDetect( .01, "test1.bmp");
 }
 

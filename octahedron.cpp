@@ -70,7 +70,6 @@ bool octahedron::Intersect(const ray &R, intersection &inter)
 
 	// Point and normal of intersection
 	inter.p = R.PointOnRay(inter.t);
-	//inter.n = inter.p - point(0,0,0);
 
 	// Other data needed by the tracer
 	inter.s = this;
