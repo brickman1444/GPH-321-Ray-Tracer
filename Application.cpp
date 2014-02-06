@@ -52,10 +52,8 @@ Application::Application()
 { 
 	Win.Setup(0, 0, 500, 500, false);
 	Win.SetText("Ray Tracing");
-
 	Win.AddMainMenu();
 	Win.AddFileMenu();
-
 	Win.SetPaintEvent(this, &Application::UpdateWindow);
 	Win.Show();
 
@@ -76,19 +74,13 @@ Application::Application()
 	s.camera = point(5, 4, 3);
 	s.target = point(0, 0, 0);
 
-	octo1.SetColor(rgb::white);
-	//s.shapes.Append(&octo1);
-
 	octo2.SetMaterial(rainbow);
 	octo2.SetTranslation(0,0,.5);
 	
 	octo2.SetColor(rgb::offWhite);
 	octo2.SetScale(.25,.25,1);
-	octo2.SetRotation(0,0,0);
+	octo2.SetRotation(0,0,45);
 	s.shapes.Append(&octo2);
-
-	globe1.SetMaterial(m);
-	//s.shapes.Append(&globe1);
 
 	s.up = vector(0, 0, 1);
 	s.win = &Win;
@@ -96,13 +88,11 @@ Application::Application()
 	s.windowW = 1.5;
 	s.windowH = 1.5;
 
-	//s.backgroundColor = rgb::green;
-
-	s.DrawScene();
+	//s.DrawScene();
 	//s.DrawScene("test.bmp");
 	//s.DrawSceneAntialias(4,4,"test10x10.bmp");
 	//s.DrawSceneMonteCarlo(100,"test2.bmp");
-	//s.DrawSceneMonteCarloAdvanced(16, 32, .01, "test1.bmp");
+	s.DrawSceneMonteCarloAdvanced(16, 32, .01, "test1.bmp");
 	//s.DrawSceneEdgeDetect( .01, "test1.bmp");
 }
 

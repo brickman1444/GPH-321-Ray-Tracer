@@ -135,7 +135,7 @@ void shape::RecalculateMatrices(void)
 	S = matrix::Scale(scale[0],scale[1],scale[2]);
 	Rx = matrix::RotationX(rotX);
 	Ry = matrix::RotationY(rotY);
-	Rz = matrix::RotationY(rotZ);
+	Rz = matrix::RotationZ(rotZ);
 	T = matrix::Translation(translation[0],translation[1],translation[2]);
 	totalTransform = T*Rz*Ry*Rx*S;
 
