@@ -25,15 +25,15 @@ void cube::CalculateSides() {
 
 	//Right Side
 	side[1].AddPoint(bottomBackLeftPoint + sideLength * right);
-	side[1].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * right);
-	side[1].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up + sideLength * right);
-	side[1].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * right);
+	side[1].AddPoint(bottomBackLeftPoint + sideLength * right + sideLength * forward);
+	side[1].AddPoint(bottomBackLeftPoint + sideLength * right + sideLength * forward + sideLength * up);
+	side[1].AddPoint(bottomBackLeftPoint + sideLength * right + sideLength * up);
 	side[1].CalculateNormal();
 
 	//Up Side
 	side[2].AddPoint(bottomBackLeftPoint + sideLength * up);
-	side[2].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up);
-	side[2].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up + sideLength * right);
+	side[2].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * forward);
+	side[2].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * forward + sideLength * right);
 	side[2].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * right);
 	side[2].CalculateNormal();
 
@@ -53,9 +53,9 @@ void cube::CalculateSides() {
 
 	//Forward Side
 	side[5].AddPoint(bottomBackLeftPoint + sideLength * forward);
-	side[5].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * forward);
-	side[5].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * right + sideLength * forward);
-	side[5].AddPoint(bottomBackLeftPoint + sideLength * right + sideLength * forward);
+	side[5].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up);
+	side[5].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up + sideLength * right);
+	side[5].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * right);
 	side[5].CalculateNormal();
 }
 

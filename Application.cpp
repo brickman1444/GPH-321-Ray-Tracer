@@ -68,7 +68,7 @@ Application::Application()
 	floor.SetColor(rgb::lightGray);
 	s.shapes.Append(&floor);
 
-	light_1 = pointLight(point(7,-7,7), rgb(.9,.9,.9), rgb::white, rgb(.1,.1,.1), true);
+	light_1 = pointLight(point(7,7,7), rgb(.9,.9,.9), rgb::white, rgb(.1,.1,.1), true);
 	s.lights.Append(&light_1);
 
 	s.camera = point(5, 4, 3);
@@ -82,17 +82,23 @@ Application::Application()
 	octo2.SetRotation(0,0,45);
 	s.shapes.Append(&octo2);
 
+	box1.SetMaterial(m);
+	box1.SetColor(rgb::white);
+	box1.SetScale(20,20,20);
+	box1.CalculateSides();
+	s.shapes.Append(&box1);
+
 	s.up = vector(0, 0, 1);
 	s.win = &Win;
 	s.windowD = 2;
 	s.windowW = 1.5;
 	s.windowH = 1.5;
 
-	//s.DrawScene();
+	s.DrawScene();
 	//s.DrawScene("test.bmp");
 	//s.DrawSceneAntialias(4,4,"test10x10.bmp");
 	//s.DrawSceneMonteCarlo(100,"test2.bmp");
-	s.DrawSceneMonteCarloAdvanced(16, 32, .01, "test1.bmp");
+	//s.DrawSceneMonteCarloAdvanced(16, 32, .01, "test1.bmp");
 	//s.DrawSceneEdgeDetect( .01, "test1.bmp");
 }
 
