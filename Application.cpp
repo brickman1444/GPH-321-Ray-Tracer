@@ -76,31 +76,16 @@ Application::Application()
 	s.camera = point(5, 4, 3);
 	s.target = point(0, 0, 0);
 
-	octo1.SetMaterial(rainbow);
-	octo1.SetRadius(1);
-	octo1.SetTranslation(2,1,.25);
-	octo1.SetXRotation(45);
-	octo1.SetScale(.25,.25,.25);
-
 	octo1.SetColor(rgb::white);
 	//s.shapes.Append(&octo1);
 
 	octo2.SetMaterial(rainbow);
-	octo2.SetTranslation(0,0,1);
+	octo2.SetTranslation(0,0,.5);
 	
 	octo2.SetColor(rgb::offWhite);
 	octo2.SetScale(.25,.25,1);
-	octo2.SetRotation(0,0,20);
+	octo2.SetRotation(0,0,0);
 	s.shapes.Append(&octo2);
-
-	octo3.SetMaterial(ref);
-	octo3.SetTranslation(1,2,.5);
-	octo3.SetXRotation(25);
-	octo3.SetZRotation(10);
-	octo3.SetScale(.5,.5,.5);
-
-	octo3.SetColor(rgb::red);
-	//s.shapes.Append(&octo3);
 
 	globe1.SetMaterial(m);
 	//s.shapes.Append(&globe1);

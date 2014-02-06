@@ -115,6 +115,11 @@ void shape::RecalculateMatrices(void)
 
 	matrix S, Rx, Ry, Rz, T;
 
+	//deprecated with Inverse() method
+	//matrix S_Inv, Rx_Inv, Ry_Inv, Rz_Inv, T_Inv;
+
+	// To Do
+	//
 	// Compute the totalTransform as the product of the scale, rotation
 	// and translation.  Remember, we want the matrix to apply the 
 	// Scale first then the x-Rotation, y-Rotation and z-Rotation and
@@ -134,6 +139,14 @@ void shape::RecalculateMatrices(void)
 	T = matrix::Translation(translation[0],translation[1],translation[2]);
 	totalTransform = T*Rz*Ry*Rx*S;
 
+	/*deprecated with Inverse method
+	S_Inv = matrix::Scale(1.0/scale[0],1.0/scale[1],1.0/scale[2]);
+	Rx_Inv = matrix::RotationX(-rotX);
+	Ry_Inv = matrix::RotationY(-rotY);
+	Rz_Inv = matrix::RotationY(-rotZ);
+	T_Inv = matrix::Translation(-translation[0],-translation[1],-translation[2]);
+	inverseTransform = S_Inv*Rx_Inv*Ry_Inv*Rz_Inv*T_Inv;
+	*/
 	totalTransform.Inverse(inverseTransform);
 
 	inverseTranspose = inverseTransform.Transpose();
