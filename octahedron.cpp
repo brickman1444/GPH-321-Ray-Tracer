@@ -3,7 +3,7 @@
 bool octahedron::Intersect(const ray &R, intersection &inter)
 {
 	// An octahedron is just a sphere in manhattan distance, so
-	// abs(R.v[0]*t R.p[0]) + abs(R.v[0]*t R.p[0]) + abs(R.v[0]*t R.p[0]) = radius
+	// abs(R.v[0]*t R.p[0]) + abs(R.v[0]*t R.p[0]) + abs(R.v[0]*t R.p[0]) = 1
 	// there are eight conditions because each absolute value can be positive or negative 
 	// and 2^3 = 8. This makes sense because the octahedron has eight sides
 
@@ -15,35 +15,35 @@ bool octahedron::Intersect(const ray &R, intersection &inter)
 
 	//1
 	if (!IsZero(R.v[0] + R.v[1] + R.v[2])) {
-		t[0] = (radius - R.p[0] - R.p[1] - R.p[2]) / (R.v[0] + R.v[1] + R.v[2]);
+		t[0] = (1 - R.p[0] - R.p[1] - R.p[2]) / (R.v[0] + R.v[1] + R.v[2]);
 	}
 	//2
 	if (!IsZero(R.v[0] + R.v[1] - R.v[2])) {
-		t[1] = (radius - R.p[0] - R.p[1] + R.p[2]) / (R.v[0] + R.v[1] - R.v[2]);
+		t[1] = (1 - R.p[0] - R.p[1] + R.p[2]) / (R.v[0] + R.v[1] - R.v[2]);
 	}
 	//3
 	if (!IsZero(R.v[0] - R.v[1] + R.v[2])) {
-		t[2] = (radius - R.p[0] + R.p[1] - R.p[2]) / (R.v[0] - R.v[1] + R.v[2]);
+		t[2] = (1 - R.p[0] + R.p[1] - R.p[2]) / (R.v[0] - R.v[1] + R.v[2]);
 	}
 	//4
 	if (!IsZero(R.v[0] - R.v[1] - R.v[2])) {
-		t[3] = (radius - R.p[0] + R.p[1] + R.p[2]) / (R.v[0] - R.v[1] - R.v[2]);
+		t[3] = (1 - R.p[0] + R.p[1] + R.p[2]) / (R.v[0] - R.v[1] - R.v[2]);
 	}
 	//5
 	if (!IsZero(-R.v[0] + R.v[1] + R.v[2])) {
-		t[4] = (radius + R.p[0] - R.p[1] - R.p[2]) / (-R.v[0] + R.v[1] + R.v[2]);
+		t[4] = (1 + R.p[0] - R.p[1] - R.p[2]) / (-R.v[0] + R.v[1] + R.v[2]);
 	}
 	//6
 	if (!IsZero(-R.v[0] + R.v[1] - R.v[2])) {
-		t[5] = (radius + R.p[0] - R.p[1] + R.p[2]) / (-R.v[0] + R.v[1] - R.v[2]);
+		t[5] = (1 + R.p[0] - R.p[1] + R.p[2]) / (-R.v[0] + R.v[1] - R.v[2]);
 	}
 	//7
 	if (!IsZero(-R.v[0] - R.v[1] + R.v[2])) {
-		t[6] = (radius + R.p[0] + R.p[1] - R.p[2]) / (-R.v[0] - R.v[1] + R.v[2]);
+		t[6] = (1 + R.p[0] + R.p[1] - R.p[2]) / (-R.v[0] - R.v[1] + R.v[2]);
 	}
 	//8
 	if (!IsZero(-R.v[0] - R.v[1] - R.v[2])) {
-		t[7] = (radius + R.p[0] + R.p[1] + R.p[2]) / (-R.v[0] - R.v[1] - R.v[2]);
+		t[7] = (1 + R.p[0] + R.p[1] + R.p[2]) / (-R.v[0] - R.v[1] - R.v[2]);
 	}
 
 	// Set t in inter, which stores the final result, to an impossibly large value so that
@@ -65,9 +65,9 @@ bool octahedron::Intersect(const ray &R, intersection &inter)
 			// Get the point in 3D space
 			inter.p = R.PointOnRay(t[i]);
 
-			// Check whether the point in space is radius units away from the origin in 
+			// Check whether the point in space is 1 unit away from the origin in 
 			// manhattan distance.
-			if (IsEqual(fabs(inter.p[0]) + fabs(inter.p[1]) + fabs(inter.p[2]),radius)) {
+			if (IsEqual(fabs(inter.p[0]) + fabs(inter.p[1]) + fabs(inter.p[2]),1)) {
 				found = true;
 				inter.t = t[i];
 
