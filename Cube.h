@@ -9,11 +9,11 @@ class cube : public shape
 {
 public:
 
-	cube() : bottomBackLeftPoint(0,0,0), up(0,0,1), right(0,1,0), sideLength(1) { }
-	void SetUp(vector u) { up = u; }
-	void SetRight(vector r) { right = r; }
-	void SetBottomBackLeftPoint(point bblp) { bottomBackLeftPoint = bblp; }
-	void SetSideLength(double d) { sideLength = d; }
+	cube() { }
+	//void SetUp(vector u) { up = u; }
+	//void SetRight(vector r) { right = r; }
+	//void SetBottomBackLeftPoint(point bblp) { bottomBackLeftPoint = bblp; }
+	//void SetSideLength(double d) { sideLength = d; }
 	void CalculateSides(void);
 	bool Intersect(const ray &R, intersection &I);
 	virtual void SetMaterial(material &m);
@@ -23,9 +23,13 @@ public:
 
 private:
 	
-	point bottomBackLeftPoint;// The anchor point in the corner of the cube
-	vector up, right;// vectors used to build out the cube from the corner. forward is constructed in CalculateSides()
-	double sideLength;
+	static const point originPoint;// The anchor point in the corner of the cube
+
+	// vectors used to build out the cube
+	static const vector up;// = vector(0,0,1);
+	static const vector right;// = vector(0,1,0);
+	static const vector forward;// = vector(1,0,0);
+	//double sideLength;
 };
 
 #endif

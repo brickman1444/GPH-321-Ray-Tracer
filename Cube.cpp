@@ -3,59 +3,53 @@
 #include "Polygon.h"
 #include "material.h"
 
+const vector cube::up = vector(0,0,1);
+const vector cube::forward = vector(1,0,0);
+const vector cube::right = vector(0,1,0);
+const point cube::originPoint = point(0,0,0);
+
 void cube::CalculateSides() {
-	// Create forward vector perpendicular to right and up
-	// If right and up are the same direction or opposite directions, 
-	// forward have 0 length. 
-	vector forward = Cross(right, up);
-	// recreate right vector perpendicular to up and forward in case the 
-	// original right vector was not at a right angle to up
-	vector right = Cross(up, forward);
-	// normalize all vectors so they can be used for calculating coordinates
-	right.Normalize();
-	up.Normalize();
-	forward.Normalize();
 
 	//Left Side
-	side[0].AddPoint(bottomBackLeftPoint);
-	side[0].AddPoint(bottomBackLeftPoint + sideLength * forward);
-	side[0].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up);
-	side[0].AddPoint(bottomBackLeftPoint + sideLength * up);
+	side[0].AddPoint(originPoint);
+	side[0].AddPoint(originPoint + forward);
+	side[0].AddPoint(originPoint + forward + up);
+	side[0].AddPoint(originPoint + up);
 	side[0].CalculateNormal();
 
 	//Right Side
-	side[1].AddPoint(bottomBackLeftPoint + sideLength * right);
-	side[1].AddPoint(bottomBackLeftPoint + sideLength * right + sideLength * forward);
-	side[1].AddPoint(bottomBackLeftPoint + sideLength * right + sideLength * forward + sideLength * up);
-	side[1].AddPoint(bottomBackLeftPoint + sideLength * right + sideLength * up);
+	side[1].AddPoint(originPoint + right);
+	side[1].AddPoint(originPoint + right + forward);
+	side[1].AddPoint(originPoint + right + forward + up);
+	side[1].AddPoint(originPoint + right + up);
 	side[1].CalculateNormal();
 
 	//Up Side
-	side[2].AddPoint(bottomBackLeftPoint + sideLength * up);
-	side[2].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * forward);
-	side[2].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * forward + sideLength * right);
-	side[2].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * right);
+	side[2].AddPoint(originPoint + up);
+	side[2].AddPoint(originPoint + up + forward);
+	side[2].AddPoint(originPoint + up + forward + right);
+	side[2].AddPoint(originPoint + up + right);
 	side[2].CalculateNormal();
 
 	//Down Side
-	side[3].AddPoint(bottomBackLeftPoint);
-	side[3].AddPoint(bottomBackLeftPoint + sideLength * forward);
-	side[3].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * right);
-	side[3].AddPoint(bottomBackLeftPoint + sideLength * right);
+	side[3].AddPoint(originPoint);
+	side[3].AddPoint(originPoint + forward);
+	side[3].AddPoint(originPoint + forward + right);
+	side[3].AddPoint(originPoint + right);
 	side[3].CalculateNormal();
 
 	//Back Side
-	side[4].AddPoint(bottomBackLeftPoint);
-	side[4].AddPoint(bottomBackLeftPoint + sideLength * up);
-	side[4].AddPoint(bottomBackLeftPoint + sideLength * up + sideLength * right);
-	side[4].AddPoint(bottomBackLeftPoint + sideLength * right);
+	side[4].AddPoint(originPoint);
+	side[4].AddPoint(originPoint + up);
+	side[4].AddPoint(originPoint + up + right);
+	side[4].AddPoint(originPoint + right);
 	side[4].CalculateNormal();
 
 	//Forward Side
-	side[5].AddPoint(bottomBackLeftPoint + sideLength * forward);
-	side[5].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up);
-	side[5].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * up + sideLength * right);
-	side[5].AddPoint(bottomBackLeftPoint + sideLength * forward + sideLength * right);
+	side[5].AddPoint(originPoint + forward);
+	side[5].AddPoint(originPoint + forward + up);
+	side[5].AddPoint(originPoint + forward + up + right);
+	side[5].AddPoint(originPoint + forward + right);
 	side[5].CalculateNormal();
 }
 
@@ -63,6 +57,8 @@ bool cube::Intersect(const ray &R, intersection &inter)
 {
 	// Make an impossibly large t so that any intersection would be before it
 	inter.t = DBL_MAX;
+
+	// Create a temporary intersection object to store the intersection data for the sides.
 	intersection temp = inter;
 	bool anyIntersection = false;
 
