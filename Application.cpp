@@ -30,12 +30,14 @@ private:
 	cube box1, box2, box3;
 	sphere globe1, globe2;
 	octahedron octo1, octo2, octo3;
+
 	phongMaterial m;
 	reflectivePhong ref;
 	reflectiveCheckerboardPhong shinyChecks;
 	checkerboardPhong checks;
 	rainbowPhong rainbow;
 	glass glassMat;
+
 	ambientLight amb;
 	pointLight light_1;
 	scene s;
@@ -50,17 +52,17 @@ public:
 
 Application::Application()
 { 
-	Win.Setup(0, 0, 500, 500, false);
-	Win.SetText("Ray Tracing");
+	Win.Setup(0, 0, 400, 400, false);
+	Win.SetText("Ray Tracer");
 	Win.AddMainMenu();
 	Win.AddFileMenu();
 	Win.SetPaintEvent(this, &Application::UpdateWindow);
 	Win.Show();
 
-	ref.SetReflectiveIndex(.1);
+	ref.SetReflectiveIndex(.3);
 	ref.SetScene(s);
 
-	shinyChecks.SetReflectiveIndex(.2);
+	shinyChecks.SetReflectiveIndex(.25);
 	shinyChecks.SetScene(s);
 
 	floor = plane(point(0,0,0), vector(0,0,1));
@@ -68,38 +70,48 @@ Application::Application()
 	floor.SetColor(rgb::lightGray);
 	s.shapes.Append(&floor);
 
-	light_1 = pointLight(point(7,7,7), rgb(.9,.9,.9), rgb::white, rgb(.1,.1,.1), true);
+	light_1 = pointLight(point(7,2,7), rgb(.9,.9,.9), rgb::white, rgb(.1,.1,.1), true);
 	s.lights.Append(&light_1);
 
 	s.camera = point(5, 4, 3);
 	s.target = point(0, 0, 0);
 
-	octo2.SetMaterial(rainbow);
+	octo2.SetMaterial(m);
 	octo2.SetTranslation(0,0,.5);
-	
-	octo2.SetColor(rgb::offWhite);
-	octo2.SetScale(.25,.25,1);
-	octo2.SetRotation(0,0,45);
+	octo2.SetColor(rgb::red);
+	octo2.SetScale(.5,.5,.5);
+	octo2.SetRotation(0,0,0);
+	octo2.SetTranslation(2.25,.5,.5);
 	s.shapes.Append(&octo2);
 
-	box1.SetMaterial(m);
+	rainbow = rainbowPhong(2,2,2);
+	box1.SetMaterial(rainbow);
 	box1.SetColor(rgb::white);
-	box1.SetScale(20,20,20);
+	box1.SetScale(1,1,1.5);
+	box1.SetRotation(0,0,5);
+	box1.SetTranslation(.25,.1,0);
 	box1.CalculateSides();
 	s.shapes.Append(&box1);
+
+	globe1.SetMaterial(ref);
+	globe1.SetColor(rgb::yellow);
+	globe1.SetTranslation(1,2,.5);
+	globe1.SetScale(.5,.5,.5);
+	globe1.SetRotation(0,10,-150);
+	s.shapes.Append(&globe1);
 
 	s.up = vector(0, 0, 1);
 	s.win = &Win;
 	s.windowD = 2;
-	s.windowW = 1.5;
-	s.windowH = 1.5;
+	s.windowW = 1.4;
+	s.windowH = 1.4;
 
-	s.DrawScene();
-	//s.DrawScene("test.bmp");
-	//s.DrawSceneAntialias(4,4,"test10x10.bmp");
-	//s.DrawSceneMonteCarlo(100,"test2.bmp");
-	//s.DrawSceneMonteCarloAdvanced(16, 32, .01, "test1.bmp");
-	//s.DrawSceneEdgeDetect( .01, "test1.bmp");
+	//s.DrawScene();
+	s.DrawScene("renderDefault.bmp");
+	s.DrawSceneAntialias(4,4,"render4x4Array.bmp");
+	s.DrawSceneMonteCarlo(16,"renderMonteCarlo16.bmp");
+	s.DrawSceneMonteCarloAdvanced(4, 16, .01, "renderMonteCarloAdvanced4-16.bmp");
+	s.DrawSceneEdgeDetect( .01, "renderEdgeDetection.bmp");
 }
 
 void Application::UpdateWindow(intRect UpdateRect)
