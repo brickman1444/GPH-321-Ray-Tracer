@@ -10,6 +10,8 @@ const point cube::originPoint = point(0,0,0);
 
 void cube::CalculateSides() {
 
+	// Construct the polygon sides of the cube
+
 	//Left Side
 	side[0].AddPoint(originPoint);
 	side[0].AddPoint(originPoint + forward);
@@ -60,6 +62,8 @@ bool cube::Intersect(const ray &R, intersection &inter)
 
 	// Create a temporary intersection object to store the intersection data for the sides.
 	intersection temp = inter;
+
+	// Create a variable to store if any intersection has been found.
 	bool anyIntersection = false;
 
 	// Run the Intersect method for every side with different intersection objects
@@ -68,6 +72,9 @@ bool cube::Intersect(const ray &R, intersection &inter)
 	for (int i = 0; i < 6; i++) {
 		if (side[i].Intersect(R, temp)) {
 			anyIntersection = true;
+
+			// temp.t is already insured to be greater than 0 by the Intersect method
+			// Intersect would return false if t were less than 0
 			if (temp.t < inter.t) {
 				inter = temp;
 			}

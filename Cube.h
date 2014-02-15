@@ -9,7 +9,7 @@ class cube : public shape
 {
 public:
 
-	cube() { }
+	cube() { CalculateSides(); }
 	//void SetUp(vector u) { up = u; }
 	//void SetRight(vector r) { right = r; }
 	//void SetBottomBackLeftPoint(point bblp) { bottomBackLeftPoint = bblp; }

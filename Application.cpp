@@ -90,7 +90,7 @@ Application::Application()
 	box1.SetScale(1,1,1.5);
 	box1.SetRotation(0,0,5);
 	box1.SetTranslation(.25,.1,0);
-	box1.CalculateSides();
+	//box1.CalculateSides();
 	s.shapes.Append(&box1);
 
 	globe1.SetMaterial(ref);
