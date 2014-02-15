@@ -106,12 +106,12 @@ Application::Application()
 	s.windowW = 1.4;
 	s.windowH = 1.4;
 
-	//s.DrawScene();
-	s.DrawScene("renderDefault.bmp");
-	s.DrawSceneAntialias(4,4,"render4x4Array.bmp");
-	s.DrawSceneMonteCarlo(16,"renderMonteCarlo16.bmp");
-	s.DrawSceneMonteCarloAdvanced(4, 16, .01, "renderMonteCarloAdvanced4-16.bmp");
-	s.DrawSceneEdgeDetect( .01, "renderEdgeDetection.bmp");
+	s.DrawScene();
+	//s.DrawScene("renderDefault.bmp");
+	//s.DrawSceneAntialias(4,4,"render4x4Array.bmp");
+	//s.DrawSceneMonteCarlo(16,"renderMonteCarlo16.bmp");
+	//s.DrawSceneMonteCarloAdvanced(4, 16, .01, "renderMonteCarloAdvanced4-16.bmp");
+	//s.DrawSceneEdgeDetect( .01, "renderEdgeDetection.bmp");
 }
 
 void Application::UpdateWindow(intRect UpdateRect)
