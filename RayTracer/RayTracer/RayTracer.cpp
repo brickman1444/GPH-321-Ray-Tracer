@@ -16,6 +16,7 @@ ATOM				MyRegisterClass(HINSTANCE hInstance);
 BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
+bool				LoadBMPIntoDC (HDC hDC, LPCTSTR bmpfile);
 
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -122,7 +123,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_PAINT	- Paint the main window
 //  WM_DESTROY	- post a quit message and return
 //
-//
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	int wmId, wmEvent;
@@ -150,6 +150,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 		// TODO: Add any drawing code here...
+
+		LoadBMPIntoDC(hdc, L"smile.bmp");
 
 		EndPaint(hWnd, &ps);
 		break;
@@ -180,4 +182,44 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 	return (INT_PTR)FALSE;
+}
+
+bool LoadBMPIntoDC (HDC hDC, LPCTSTR bmpfile)
+{
+	// check if params are valid 
+	if ( ( NULL == hDC  ) || ( NULL == bmpfile ) )
+		return false;      
+
+	// load bitmap into a bitmap handle
+	HANDLE hBmp = LoadImage ( NULL, bmpfile, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE );
+	
+	if ( NULL == hBmp )
+	{
+		return false;        // failed to load image
+	}
+ 
+	// bitmaps can only be selected into memory dcs:
+	HDC dcmem = CreateCompatibleDC ( NULL );
+
+	// now select bitmap into the memory dc
+	if ( NULL == SelectObject ( dcmem, hBmp ) )
+	{	// failed to load bitmap into device context
+		DeleteDC ( dcmem ); 
+		return false; 
+	}
+
+	// now get the bmp size
+	BITMAP bm;
+	GetObject ( hBmp, sizeof(bm), &bm );
+	// and blit it to the visible dc
+	if ( BitBlt ( hDC, 0, 0, bm.bmWidth, bm.bmHeight, dcmem,
+		0, 0, SRCCOPY ) == 0 )
+	{	// failed the blit
+		DeleteDC ( dcmem ); 
+		return false; 
+	}
+
+	DeleteDC ( dcmem );  // clear up the memory dc
+	
+	return true;
 }
