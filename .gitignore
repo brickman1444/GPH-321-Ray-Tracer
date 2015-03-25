@@ -1,0 +1,6 @@
+RayTracer/Debug/
+RayTracer/RayTracer/Debug/
+*.opensdf
+*.sdf
+*.suo
+RayTracer/ipch/
